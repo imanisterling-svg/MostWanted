@@ -5,19 +5,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MostWanted"
     Shell.FlyoutBehavior="Flyout">
+    
+    
 
     <FlyoutItem Title="Home" Icon="home.png">
-
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
-
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+            
+            </Tab>
 
     </FlyoutItem>
     
     <FlyoutItem Title="Home" Icon="home.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:LayoutExample}"/>
+        </Tab>
+    </FlyoutItem>
 
-        <ShellContent ContentTemplate="{DataTemplate local:LayoutExample}"/>
+    <FlyoutItem Title="Test Page" Icon="home.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:TestPage}"/>
+        </Tab>
+    </FlyoutItem>
 
-     </FlyoutItem>
+    <FlyoutItem Title="Test Page2" Icon="home.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:TestPage2}"/>
+        </Tab>
+    </FlyoutItem>
+
 
 
 
