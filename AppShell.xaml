@@ -8,7 +8,7 @@
     
     
 
-    <FlyoutItem Title="Home" Icon="home.png">
+    <FlyoutItem Title="Wanted" Icon="home.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
             
@@ -28,13 +28,20 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Test Page2" Icon="home.png">
+    <FlyoutItem Title="Add Wanted Person" Icon="wantedperson.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:TestPage2}"/>
         </Tab>
+        
+        
     </FlyoutItem>
 
 
+    <FlyoutItem Title="Main Page" Icon="wantedperson.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+    </FlyoutItem>
 
 
 

@@ -1,13 +1,15 @@
-﻿namespace MostWanted
+﻿using MostWanted.ViewsModels;
+namespace MostWanted
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
         public const double FontSize = 22;
 
-        public MainPage()
+        public MainPage(WantedPersonListViewModel wantedPersonListViewModel)
         {
             InitializeComponent();
+            BindingContext = wantedPersonListViewModel;
         }
 
     //    private void OnCounterClicked(object? sender, EventArgs e)

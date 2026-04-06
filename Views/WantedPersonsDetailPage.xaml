@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MostWanted.Views.WantedPersonsDetailPage"
+             xmlns:vm="clr-namespace:MostWanted.ViewsModels"
+             Title="{Binding WantedPerson.Name }"
+             x:DataType="vm:WantedPersonDetailsViewModel">
+
+
+    <VerticalStackLayout>
+        <Label 
+            Text="{Binding WantedPerson.Id}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Label 
+          Text="{Binding WantedPerson.Name}"
+          VerticalOptions="Center" 
+          HorizontalOptions="Center" />
+
+
+        <Label 
+          Text="{Binding WantedPerson.Description}"
+          VerticalOptions="Center" 
+          HorizontalOptions="Center" />
+
+        <Label 
+          Text="{Binding WantedPerson.Type}"
+          VerticalOptions="Center" 
+          HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

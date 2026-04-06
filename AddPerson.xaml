@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MostWanted.TestPage2"
+             xmlns:model="clr-namespace:MostWanted.Model"
+             xmlns:modelview="clr-namespace:MostWanted.ViewsModels"
+             x:DataType="modelview:WantedPersonListViewModel"
+             Title="Add Person">
+
+    <Grid ColumnSpacing="1" RowSpacing="1" Padding="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="Upload Wanted Person"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   x:Name="LblCounter"
+                   FontSize="22"
+                   FontAttributes="Bold" />
+        </VerticalStackLayout>
+
+        <!-- Entry Form -->
+        <VerticalStackLayout Padding="5" Grid.Row="1" Margin="9">
+            <Entry Placeholder="The Name" Text="{Binding Name}" />
+            <Entry Placeholder="Enter Person Description" Text="{Binding Description}" />
+            <Entry Placeholder="Type of Offence" Text="{Binding Type}" />
+
+            <Image x:Name="PersonImage"
+       Source="{Binding ImagePath}"  
+                HeightRequest="150"
+       WidthRequest="150"
+       Aspect="AspectFill"
+       BackgroundColor="LightGray"
+       Margin="0,5"/>
+
+
+           
+
+            <!-- Image Buttons -->
+            <HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+                <Button Text="Select Image" Clicked="Button_SelectImage_Clicked" />
+                <Button Text="Take Photo" Clicked="Button_TakePhoto_Clicked" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+        <!-- Add Button -->
+        
+        
+        <Button Text="Add Most Wanted"
+                Grid.Row="2"
+                Margin="9"
+                IsEnabled="{Binding IsNotLoading}"
+                Command="{Binding AddPersonCommand}" />
+
+        <!-- Launch List Button -->
+        <Button Text="Launch Most Wanted" 
+                Command="{Binding GetWantedPersonListCommand}"
+                IsEnabled="{Binding IsNotLoading}"
+                Margin="10"
+                Grid.Row="3" />
+
+        <!-- RefreshView and CollectionView -->
+        <RefreshView Grid.Row="4"
+                     Command="{Binding GetWantedPersonListCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView ItemsSource="{Binding WantedPersons}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate x:DataType="model:WantedPerson">
+
+                        <!-- Single root: Border -->
+                        <Border HeightRequest="70" Padding="5" Margin="5">
+
+                            <!-- Grid for row layout -->
+                            <Grid ColumnSpacing="10">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!-- Id -->
+                                    <ColumnDefinition Width="2*"/>
+                                    <!-- Name -->
+                                    <ColumnDefinition Width="3*"/>
+                                    <!-- Type -->
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!-- Update -->
+                                    <ColumnDefinition Width="Auto"/>
+                                    <!-- Delete -->
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Tap gesture on row -->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type modelview:WantedPersonListViewModel}}, Path=GetWantedPersonDetailsCommand}" 
+                                        CommandParameter="{Binding Id}" />
+                                </Grid.GestureRecognizers>
+
+                                <!-- Data -->
+                                <Label Grid.Column="0" Text="{Binding Id}" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center"/>
+                                <!--<Label Grid.Column="2" Text="{Binding Description}" VerticalOptions="Center"/>-->
+                                <Label Grid.Column="2" Text="{Binding Type}" VerticalOptions="Center"/>
+
+                                <!-- Buttons -->
+                                <Button Grid.Column="3"
+                                        Text="Update"
+                                        Margin="5"
+                                        HeightRequest="30"
+                                        WidthRequest="70"
+                                        BackgroundColor="Orange"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type modelview:WantedPersonListViewModel}}, Path=UpdatePersonCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                <Button Grid.Column="4"
+                                        Text="Delete"
+                                        Margin="5"
+                                        HeightRequest="30"
+                                        WidthRequest="70"
+                                        BackgroundColor="Red"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type modelview:WantedPersonListViewModel}}, Path=DeletePersonCommand}"
+                                        CommandParameter="{Binding Id}" />
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </RefreshView>
+
+    </Grid>
+</ContentPage>

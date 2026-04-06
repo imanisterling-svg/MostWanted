@@ -1,23 +1,25 @@
+using System.Diagnostics;
+
 namespace MostWanted;
 
 public class TestPage : ContentPage 
 {
     //Place your varables within he main public class
     int count = 0;
-    Label LblCounter;
+    readonly Label LblCounter;
     public TestPage()  //This is a constructor  
     {
 
-
+        Debug.WriteLine("MainPage started successfully");
         //Content = new StackLayout
 
         //{
         //    Children = { 
         //        new Label { Text="Welcome the the MOST WANTED APP" }
-            
+
         //    }
-        
-        
+
+
         //};
 
         var scrollView = new ScrollView(); // This is the scroll view within the screen of the app it facilitate the content scroll capabilities
@@ -64,4 +66,6 @@ public class TestPage : ContentPage
         SemanticScreenReader.Announce(LblCounter.Text); // This will update the LblCounter area on the page
    
     }
+
+
 }

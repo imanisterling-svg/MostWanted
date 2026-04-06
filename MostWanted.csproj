@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-android</TargetFrameworks>
@@ -46,6 +46,71 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)'=='Release'">
+
+		<AndroidKeyStorage>True</AndroidKeyStorage>
+		<AndroidSiningKeyStore>mostwanted.keystore</AndroidSiningKeyStore>
+		<AndroidSingingKeyAlias>key</AndroidSingingKeyAlias>
+		<AndroidSingingKeyPass></AndroidSingingKeyPass>
+		<AndroidSingingStoragePass></AndroidSingingStoragePass>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.19041.0|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
+	
+	
+	
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.19041.0|AnyCPU'">
+	  <DebugType>embedded</DebugType>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
@@ -66,13 +131,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="TestPage2.xaml.cs">
-	    <DependentUpon>TestPage2.xaml</DependentUpon>
+	  <Compile Update="MainPage.xaml.cs">
+	    <DependentUpon>MainPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="AddPerson.xaml.cs">
+	    <DependentUpon>AddPerson.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -80,7 +151,10 @@
 	  <MauiXaml Update="LayoutExample.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="TestPage2.xaml">
+	  <MauiXaml Update="AddPerson.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\WantedPersonsDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
