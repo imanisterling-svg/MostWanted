@@ -256,23 +256,23 @@ namespace MostWanted.Services
         }
 
 
-        public int UpdatePerson(int id)
+        public int UpdatePerson(WantedPerson person)
         {
             try
             {
-
                 Init();
                 if (conn == null)
                     throw new Exception("Database not initialized");
 
-                result = conn.Table<WantedPerson>().Delete(q => q.Id == id);
-                StatusMessage = result == 0 ? "Delete Failed" : "Delete Successful";
+                // Update the record
+                int result = conn.Update(person);
+
+                StatusMessage = result == 0 ? "Update Failed" : "Update Successful";
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
-
-                StatusMessage = "Failed to delete Data";
+                StatusMessage = $"Failed to Update Data: {ex.Message}";
                 return 0;
             }
         }

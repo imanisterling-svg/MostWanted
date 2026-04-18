@@ -145,6 +145,9 @@
 	  <Compile Update="AddPerson.xaml.cs">
 	    <DependentUpon>AddPerson.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UpdateWantedPage.xaml.cs">
+	    <DependentUpon>UpdateWantedPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -154,9 +157,19 @@
 	  <MauiXaml Update="AddPerson.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ListWanted.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UpdateWantedPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\WantedPersonsDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Controls\" />
 	</ItemGroup>
 
 </Project>

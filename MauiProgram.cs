@@ -35,6 +35,9 @@ namespace MostWanted
 
             builder.Services.AddTransient<WantedPersonDetailsViewModel>();
 
+           
+builder.Services.AddSingleton<ListWanted>();
+
 
 
             builder.Services.AddTransient<MainPage>();

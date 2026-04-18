@@ -15,7 +15,7 @@
     <Grid ColumnDefinitions="*,*" ColumnSpacing="5"
       RowDefinitions="Auto,Auto,*,Auto" Margin="0,20">
 
-        <!-- 🔥 CAROUSEL -->
+        <!-- 🔥 CAROUSEL This is the slide show for the App  -->
         <CarouselView
         Grid.Row="0"
         Grid.ColumnSpan="2"

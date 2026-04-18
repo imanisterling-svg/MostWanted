@@ -65,14 +65,14 @@
                 Command="{Binding AddPersonCommand}" />
 
         <!-- Launch List Button -->
-        <Button Text="Launch Most Wanted" 
+        <!--<Button Text="Launch Most Wanted" 
                 Command="{Binding GetWantedPersonListCommand}"
                 IsEnabled="{Binding IsNotLoading}"
                 Margin="10"
-                Grid.Row="3" />
+                Grid.Row="3" />-->
 
         <!-- RefreshView and CollectionView -->
-        <RefreshView Grid.Row="4"
+        <!--<RefreshView Grid.Row="4"
                      Command="{Binding GetWantedPersonListCommand}"
                      IsRefreshing="{Binding IsRefreshing}">
 
@@ -81,39 +81,39 @@
 
                     <DataTemplate x:DataType="model:WantedPerson">
 
-                        <!-- Single root: Border -->
+                        --><!-- Single root: Border --><!--
                         <Border HeightRequest="70" Padding="5" Margin="5">
 
-                            <!-- Grid for row layout -->
+                            --><!-- Grid for row layout --><!--
                             <Grid ColumnSpacing="10">
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
-                                    <!-- Id -->
+                                    --><!-- Id --><!--
                                     <ColumnDefinition Width="2*"/>
-                                    <!-- Name -->
+                                    --><!-- Name --><!--
                                     <ColumnDefinition Width="3*"/>
-                                    <!-- Type -->
+                                    --><!-- Type --><!--
                                     <ColumnDefinition Width="Auto"/>
-                                    <!-- Update -->
+                                    --><!-- Update --><!--
                                     <ColumnDefinition Width="Auto"/>
-                                    <!-- Delete -->
+                                    --><!-- Delete --><!--
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Tap gesture on row -->
+                                --><!-- Tap gesture on row --><!--
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type modelview:WantedPersonListViewModel}}, Path=GetWantedPersonDetailsCommand}" 
                                         CommandParameter="{Binding Id}" />
                                 </Grid.GestureRecognizers>
 
-                                <!-- Data -->
+                                --><!-- Data --><!--
                                 <Label Grid.Column="0" Text="{Binding Id}" VerticalOptions="Center"/>
                                 <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center"/>
-                                <!--<Label Grid.Column="2" Text="{Binding Description}" VerticalOptions="Center"/>-->
+                                --><!--<Label Grid.Column="2" Text="{Binding Description}" VerticalOptions="Center"/>--><!--
                                 <Label Grid.Column="2" Text="{Binding Type}" VerticalOptions="Center"/>
 
-                                <!-- Buttons -->
+                                --><!-- Buttons --><!--
                                 <Button Grid.Column="3"
                                         Text="Update"
                                         Margin="5"
@@ -143,7 +143,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-        </RefreshView>
+        </RefreshView>-->
 
     </Grid>
 </ContentPage>

@@ -43,6 +43,12 @@
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem Title="View Most Wanted" Icon="viewlogo.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:ListWanted}"/>
+        </Tab>
+    </FlyoutItem>
+
 
 
 </Shell>

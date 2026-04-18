@@ -231,8 +231,34 @@ namespace MostWanted.ViewsModels
 
             await Shell.Current.DisplayAlertAsync("Update", $"Update {person.Name}", "OK");
 
+
+
+
             // Add update logic later
         }
+
+
+        [RelayCommand]
+        async Task UpdateWantedPerson(WantedPerson person)
+        {
+            if (person == null) return;
+
+            var updatePage = new UpdateWantedPage
+            {
+                BindingContext = new UpdatePersonViewModel(person)
+            };
+
+            await Application.Current.MainPage.Navigation.PushModalAsync(updatePage);
+         //   await Application.Current.MainPage.Navigation.PopModalAsync();
+
+
+        }
+
+
+
+
+      
+
 
 
     }
