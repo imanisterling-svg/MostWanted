@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MostWanted.Services;
-using MostWanted.ViewsModels;
 using MostWanted.Views;
+using MostWanted.ViewsModels;
 
 namespace MostWanted
 {
@@ -12,36 +12,38 @@ namespace MostWanted
             var builder = MauiApp.CreateBuilder();
             builder.UseMauiApp<App>()
               .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
-
-            // string dbPath = Path.Combine(FileSystem.AppDataDirectory, "wantedPerson.db");
+              {
+                  fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                  fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+              });
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "mostwanted.db");
-     
-            //builder.Services.AddSingleton(new WantedPersonService(dbPath));
+            string spottedDbPath = Path.Combine(FileSystem.AppDataDirectory, "spotted.db");
 
-            builder.Services.AddSingleton(s=>ActivatorUtilities.CreateInstance<WantedPersonService>(s,dbPath));
-
-      
-            
+            // Register local SQLite service
+            builder.Services.AddSingleton(s =>
+                ActivatorUtilities.CreateInstance<WantedPersonService>(s, dbPath));
 
 
 
 
+
+
+            // Register online service (posts to PHP API and syncs with SQLite)
+            builder.Services.AddSingleton(s =>
+                ActivatorUtilities.CreateInstance<WantedPersonServiceOnline>(s, dbPath));
+
+            // Register ViewModels
             builder.Services.AddTransient<WantedPersonListViewModel>();
+            builder.Services.AddTransient<WantedPersonOnlineViewModel>();
 
-            builder.Services.AddTransient<WantedPersonDetailsViewModel>();
+            builder.Services.AddTransient<AddPersonViewModel>();
 
-           
-builder.Services.AddSingleton<ListWanted>();
-
-
-
+            // Register Views
+            builder.Services.AddSingleton<ListWanted>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<WantedPersonsDetailPage>();
+            builder.Services.AddTransient<WantedPersonsDetailPageOnline>();
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -50,6 +52,4 @@ builder.Services.AddSingleton<ListWanted>();
             return builder.Build();
         }
     }
-
-    // DatabaseService is provided by MostWanted.Services.DatabaseService
 }
