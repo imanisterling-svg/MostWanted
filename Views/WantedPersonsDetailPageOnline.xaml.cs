@@ -2,15 +2,15 @@ using MostWanted.ViewsModels;
 
 namespace MostWanted.Views;
 
-public partial class WantedPersonsDetailPage : ContentPage
+public partial class WantedPersonsDetailPageOnline : ContentPage
 {
- public WantedPersonsDetailPage(AddPersonViewModel wantedPersonDetailsViewModel )
+    public WantedPersonsDetailPageOnline(WantedPersonOnlineViewModel wantedPersonOnlineViewModel)
     {
         InitializeComponent();
-        BindingContext = wantedPersonDetailsViewModel;
+        BindingContext = wantedPersonOnlineViewModel;
     }
 
-  
+
 
     protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
     {

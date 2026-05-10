@@ -35,7 +35,7 @@ namespace MostWanted.Services
 
 
             //conn.DeleteAll<WantedPerson>();
-            //conn.Execute("DELETE FROM sqlite_sequence WHERE name='WantedPerson'");
+            //  conn.Execute("DELETE FROM WantedPerson");
 
             if (conn != null)
             {
@@ -48,7 +48,7 @@ namespace MostWanted.Services
                 var columns = conn.GetTableInfo("WantedPerson");
                 if (columns.Count > 0)
                 {
-                    Debug.WriteLine("[DB] WantedPerson table exists with columns:");
+                    //    Debug.WriteLine("[DB] WantedPerson table exists with columns:");
                     foreach (var col in columns)
                     {
                         Debug.WriteLine($" - {col.Name} ");
@@ -74,45 +74,45 @@ namespace MostWanted.Services
         }
 
 
-        //private void Init()
-        //{
-
-
-        //    conn = new SQLiteConnection(_dbPath);
-        //    //conn.DeleteAll<WantedPerson>();
-        //    //conn.Execute("DELETE FROM sqlite_sequence WHERE name='WantedPerson'");
-
-        //    if (conn != null)
+        //   private void Init()
         //    {
 
-        //        Debug.WriteLine($"DB Connection: {conn}");
-        //        return;
+
+        //        conn = new SQLiteConnection(_dbPath);
+        //        conn.DeleteAll<WantedPerson>();
+        //        //conn.Execute("DELETE FROM sqlite_sequence WHERE name='WantedPerson'");
+
+        //        if (conn != null)
+        //        {
+
+        //            Debug.WriteLine($"DB Connection: {conn}");
+        //            return;
+        //        }
+
+
+        //        else
+        //        {  conn = new SQLiteConnection(_dbPath);
+
+        //conn.CreateTable<WantedPerson>();
+
+        //            Debug.WriteLine(" Table Created ");
+
+        //            //if (!conn.Table<WantedPerson>().Any())
+        //            //{
+        //            //    conn.Insert(new WantedPerson { Id = 1, Name = "John Doe", Description = "Burglary suspect", Type = "Felony" });
+        //            //    conn.Insert(new WantedPerson { Id = 2, Name = "Jane Smith", Description = "Fraud investigation", Type = "Felony" });
+        //            //}}
+
+
+        //            //  conn.CreateTable<WantedPerson>();
+
+        //            //if (!conn.Table<WantedPerson>().Any())
+        //            //{
+        //            //    conn.Insert(new WantedPerson { Id = 1, Name = "John Doe", Description = "Burglary suspect", Type = "Felony" });
+        //            //    conn.Insert(new WantedPerson { Id = 2, Name = "Jane Smith", Description = "Fraud investigation", Type = "Felony" });
+        //            //}
+        //        }
         //    }
-
-
-        //    else
-        //    {  conn = new SQLiteConnection(_dbPath);
-
-        //        conn.CreateTable<WantedPerson>();
-
-        //        Debug.WriteLine(" Table Created ");
-
-        //        //if (!conn.Table<WantedPerson>().Any())
-        //        //{
-        //        //    conn.Insert(new WantedPerson { Id = 1, Name = "John Doe", Description = "Burglary suspect", Type = "Felony" });
-        //        //    conn.Insert(new WantedPerson { Id = 2, Name = "Jane Smith", Description = "Fraud investigation", Type = "Felony" });
-        //        //}}
-
-
-        //        //  conn.CreateTable<WantedPerson>();
-
-        //        //if (!conn.Table<WantedPerson>().Any())
-        //        //{
-        //        //    conn.Insert(new WantedPerson { Id = 1, Name = "John Doe", Description = "Burglary suspect", Type = "Felony" });
-        //        //    conn.Insert(new WantedPerson { Id = 2, Name = "Jane Smith", Description = "Fraud investigation", Type = "Felony" });
-        //        //}
-        //    }
-        //}
 
         public List<WantedPerson> GetWantedPersons()
         {
@@ -121,7 +121,7 @@ namespace MostWanted.Services
 
             try
             {
-                Init();
+              //  Init();
                 Debug.WriteLine($"Wanted Loaded {conn}");
                 return conn.Table<WantedPerson>().ToList();
 
@@ -156,7 +156,7 @@ namespace MostWanted.Services
             Debug.WriteLine($"Hello: {id}");
             try
             {
-                Init();
+               // Init();
                 return conn.Table<WantedPerson>().FirstOrDefault(q => q.Id == id);
             }
             catch (Exception)
@@ -168,7 +168,7 @@ namespace MostWanted.Services
         }
 
 
-     
+
 
         //public List<WantedPerson> GetWantedPersonList()
         //{
@@ -198,6 +198,25 @@ namespace MostWanted.Services
         //        new WantedPerson { Id = 7, Name = "David Kim", Description = "Assault investigation", Type = "Felony"},
         //    };
         //}
+
+
+        public static class OffenceTypeService
+        {
+            public static readonly List<string> OffenceTypes = new()
+    {
+        "Theft",
+        "Fraud",
+        "Assault",
+        "Drug Trafficking",
+        "Murder",
+        "Cybercrime"
+    };
+        }
+
+
+
+
+
 
         public void AddPerson(WantedPerson wantedPerson)
         {
@@ -277,8 +296,9 @@ namespace MostWanted.Services
             }
         }
 
-
-
-
+        internal List<WantedPerson> GetWantedPersonsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

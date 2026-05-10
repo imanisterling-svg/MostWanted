@@ -5,7 +5,12 @@
 
     <VerticalStackLayout Padding="20">
         <Entry Text="{Binding Person.Name}" Placeholder="Name"/>
-        <Entry Text="{Binding Person.Type}" Placeholder="Type"/>
+        <!--<Entry Text="{Binding Person.Type}" Placeholder="Type"/>-->
+
+        <Picker Title="Select Offence Type"
+        ItemsSource="{Binding OffenceTypes}"
+        SelectedItem="{Binding Person.Type, Mode=TwoWay}" />
+        
         <Editor Text="{Binding Person.Description}" Placeholder="Description"/>
 
         <Button Text="Save"

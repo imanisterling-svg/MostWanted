@@ -8,14 +8,37 @@
     
     
 
-    <FlyoutItem Title="Wanted" Icon="home.png">
+    <FlyoutItem Title="Wanted Person" Icon="home.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
             
             </Tab>
 
     </FlyoutItem>
-    
+
+
+
+    <FlyoutItem Title="Add Wanted Person" Icon="wantedperson.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:TestPage2}"/>
+        </Tab>
+
+
+    </FlyoutItem>
+
+
+    <FlyoutItem Title="Wanted Person Online" Icon="logo.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:MainPageOnline}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="View Most Wanted" Icon="viewlogo.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate local:ListWanted}"/>
+        </Tab>
+    </FlyoutItem>
+
     <FlyoutItem Title="Home" Icon="home.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:LayoutExample}"/>
@@ -28,26 +51,6 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Add Wanted Person" Icon="wantedperson.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:TestPage2}"/>
-        </Tab>
-        
-        
-    </FlyoutItem>
-
-
-    <FlyoutItem Title="Main Page" Icon="wantedperson.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
-        </Tab>
-    </FlyoutItem>
-
-    <FlyoutItem Title="View Most Wanted" Icon="viewlogo.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:ListWanted}"/>
-        </Tab>
-    </FlyoutItem>
 
 
 

@@ -7,21 +7,79 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using System.Diagnostics;
+using System.IO;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MostWanted.ViewsModels
 {
     [QueryProperty(nameof(Id), nameof(Id))]
-    public partial class WantedPersonDetailsViewModel : BaseViewModel, IQueryAttributable
+    public partial class AddPersonViewModel : BaseViewModel, IQueryAttributable
     {
-        [ObservableProperty]
 
-        WantedPerson wantedPerson;
+        private readonly SpottedService _spottedService;
+
+
+
+        private readonly WantedPersonServiceOnline onlineService;
+
+
+        // ensure non-null default to satisfy compiled bindings
+        [ObservableProperty]
+        WantedPerson wantedPerson = new WantedPerson();
 
         [ObservableProperty]
         int id;
+        private WantedPerson selectedPerson;
 
-    
+        [RelayCommand]
 
+
+       
+        private async Task ReportSpotted()
+        {
+            var spottedService = new SpottedService(); // however you resolve this
+            var page = new ReportSpottedPage(spottedService, WantedPerson ?? selectedPerson);
+
+            await Shell.Current.Navigation.PushModalAsync(page);
+
+            Debug.WriteLine("❌ I am right here");
+        }
+
+
+
+
+        //        private async Task ReportSpotted()
+        //{
+        //    // Use an action sheet (multiple choice) instead of DisplayAlertAsync
+        //    string action = await Shell.Current.DisplayActionSheetAsync(
+        //        "Report Spotted",
+        //        "Cancel",
+        //        null,
+        //        "Take Photo",
+        //        "Record Video"
+        //    );
+
+        //    switch (action)
+        //    {
+        //        case "Take Photo":
+        //            await CapturePhoto();
+        //            break;
+
+        //        case "Record Video":
+        //            await CaptureVideo();
+        //            break;
+        //    }
+        //}
+
+        private async Task CapturePhoto()
+        {
+            await Shell.Current.DisplayAlertAsync("Info", "CapturePhoto not implemented.", "OK");
+        }
+
+        private async Task CaptureVideo()
+        {
+            await Shell.Current.DisplayAlertAsync("Info", "CaptureVideo not implemented.", "OK");
+        }
 
 
         // Implement as async void to satisfy the IQueryAttributable void signature
@@ -33,6 +91,9 @@ namespace MostWanted.ViewsModels
 
 
             var person = App.WantedPersonService.GetWantedPersonInfo(Id);
+
+
+
 
             if (person == null)
             {
@@ -111,5 +172,14 @@ namespace MostWanted.ViewsModels
 ////        }
 ////    }
 ////}
+
+
+
+
+
+
+
+
+
 
 

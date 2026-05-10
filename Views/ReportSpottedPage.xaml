@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MostWanted.Views.ReportSpottedPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Report Spotted"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <!-- Notes / TextArea -->
+            <Label Text="Details:" FontAttributes="Bold"/>
+            <Editor Text="{Binding Notes}"
+                    Placeholder="Enter details (where you saw them, etc.)"
+                    AutoSize="TextChanges"
+                    HeightRequest="120"/>
+
+            <!-- Media Buttons -->
+            <Button Text="Take Photo"
+                    Command="{Binding TakePhotoCommand}" />
+
+            <Button Text="Record Video"
+                    Command="{Binding RecordVideoCommand}" />
+
+            <!-- OK Button -->
+            <Button Text="Submit Report"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Command="{Binding SubmitCommand}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

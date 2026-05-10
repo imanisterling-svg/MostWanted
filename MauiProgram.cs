@@ -24,19 +24,13 @@ namespace MostWanted
             builder.Services.AddSingleton(s =>
                 ActivatorUtilities.CreateInstance<WantedPersonService>(s, dbPath));
 
-
-
-
-
-
-            // Register online service (posts to PHP API and syncs with SQLite)
+            // Register online service
             builder.Services.AddSingleton(s =>
                 ActivatorUtilities.CreateInstance<WantedPersonServiceOnline>(s, dbPath));
 
             // Register ViewModels
             builder.Services.AddTransient<WantedPersonListViewModel>();
             builder.Services.AddTransient<WantedPersonOnlineViewModel>();
-
             builder.Services.AddTransient<AddPersonViewModel>();
 
             // Register Views
