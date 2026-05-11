@@ -9,11 +9,8 @@ public partial class ReportSpottedPage : ContentPage
     public ReportSpottedPage(SpottedService service, WantedPerson person)
     {
         InitializeComponent();
-        BindingContext = new  ReportSpottedViewModel(service)
+        BindingContext = new ReportSpottedViewModel(service)
         {
-
-
-           
             WantedPerson = person
         };
     }
