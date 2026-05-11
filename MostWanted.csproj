@@ -5,13 +5,6 @@
 		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
 
-		<!-- Note for MacCatalyst:
-		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
-		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
-		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
-		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
-		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MostWanted</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -19,25 +12,13 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<!-- Enable XAML source generation for faster build times and improved performance.
-		     This generates C# code from XAML at compile time instead of runtime inflation.
-		     To disable, remove this line.
-		     For individual files, you can override by setting Inflator metadata:
-		       <MauiXaml Update="MyPage.xaml" Inflator="Default" /> (reverts to defaults: Runtime for Debug, XamlC for Release)
-		       <MauiXaml Update="MyPage.xaml" Inflator="Runtime" /> (force runtime inflation) -->
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
-		<!-- Display name -->
 		<ApplicationTitle>MostWanted</ApplicationTitle>
-
-		<!-- App Identifier -->
 		<ApplicationId>com.companyname.mostwanted</ApplicationId>
-
-		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
@@ -46,80 +27,58 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 	</PropertyGroup>
-	
-	
-	
-	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)'=='Release'">
 
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)'=='Release'">
 		<AndroidKeyStorage>True</AndroidKeyStorage>
 		<AndroidSiningKeyStore>mostwanted.keystore</AndroidSiningKeyStore>
 		<AndroidSingingKeyAlias>key</AndroidSingingKeyAlias>
 		<AndroidSingingKeyPass></AndroidSingingKeyPass>
 		<AndroidSingingStoragePass></AndroidSingingStoragePass>
 	</PropertyGroup>
-	
-	
-	
+
+	<!-- DEBUG / RELEASE PROPERTIES (UNCHANGED) -->
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
-	  <DebugType>embedded</DebugType>
-	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-	  <AndroidUseAapt2>True</AndroidUseAapt2>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+		<DebugType>embedded</DebugType>
+		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+		<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+		<AndroidUseAapt2>True</AndroidUseAapt2>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+		<DebugType>embedded</DebugType>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+		<DebugType>embedded</DebugType>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.19041.0|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+		<DebugType>embedded</DebugType>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
-	  <DebugType>embedded</DebugType>
-	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+		<DebugType>embedded</DebugType>
+		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+		<DebugType>embedded</DebugType>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+		<DebugType>embedded</DebugType>
 	</PropertyGroup>
-	
-	
-	
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.19041.0|AnyCPU'">
-	  <DebugType>embedded</DebugType>
+		<DebugType>embedded</DebugType>
 	</PropertyGroup>
 
+	<!-- RESOURCES (UNCHANGED) -->
 	<ItemGroup>
-		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
-		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
-		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot - Copy.png">
 		  <Resize>True</Resize>
@@ -129,19 +88,22 @@
 		
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
-
-		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<!-- 🔥 FIXED PACKAGES (IMPORTANT CHANGES HERE) -->
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.60" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.60" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.60" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.1" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+	
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
 	</ItemGroup>
 
+	<!-- FILES (UNCHANGED) -->
 	<ItemGroup>
 	  <Compile Update="Views\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
@@ -185,7 +147,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controls\" />
+		<Folder Include="Controls\" />
 	</ItemGroup>
 
 </Project>

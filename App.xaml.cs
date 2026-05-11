@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MostWanted.Services;
 
+
 namespace MostWanted
 {
     public partial class App : Application
@@ -12,6 +13,12 @@ namespace MostWanted
 
         public App(WantedPersonService wantedPersonService)
         {
+
+            WantedPersonService = wantedPersonService;
+
+
+
+
             InitializeComponent();
             MainPage = new AppShell();
             
@@ -22,7 +29,7 @@ namespace MostWanted
 
         }
 
-      
+
 
 
     }
