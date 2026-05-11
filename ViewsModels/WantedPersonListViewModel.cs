@@ -13,11 +13,14 @@ namespace MostWanted.ViewsModels
         public ObservableCollection<WantedPerson> WantedPersons { get; private set; } = new();
 
         [ObservableProperty]
-        
-        private  int currentIndex;
 
-        public WantedPersonListViewModel()
+        private int currentIndex;
+        private readonly WantedPersonServiceOnline _service;
+
+        public WantedPersonListViewModel(WantedPersonServiceOnline service)
         {
+            _service = service;
+
             Title = "Wanted List";
             //  GetWantedPerson().Wait();
 
@@ -33,8 +36,112 @@ namespace MostWanted.ViewsModels
             });
         }
 
-        
-       
+
+
+
+        [RelayCommand]
+        private async Task Save()
+        {
+
+            Debug.WriteLine("Trying to save to Online Database");
+
+
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Description) ||
+                string.IsNullOrWhiteSpace(Type))
+            {
+                await Shell.Current.DisplayAlert("Invalid Data", "Please fill all fields", "OK");
+                return;
+            }
+
+            var person = new WantedPerson
+            {
+                Name = Name,
+                Description = Description,
+                Type = Type,
+                ImagePath = ImagePath
+            };
+
+            await _service.AddPersonAsync(person);
+
+            await Shell.Current.DisplayAlert("Result", _service.StatusMessage, "OK");
+
+            // clear form
+            Name = string.Empty;
+            Description = string.Empty;
+            Type = string.Empty;
+            ImagePath = string.Empty;
+        }
+
+
+
+
+
+
+
+
+        [ObservableProperty]
+
+        string type;
+        public ObservableCollection<string> OffenceTypes { get; } =
+        new ObservableCollection<string>
+        {
+           "Theft",
+        "Fraud",
+        "Assault",
+        "Drug Trafficking",
+        "Murder",
+        "Cybercrime",
+        "Armed Robbery",
+        "Burglary",
+        "Kidnapping",
+        "Human Trafficking",
+        "Money Laundering",
+        "Extortion",
+        "Domestic Violence",
+        "Illegal Firearm Possession",
+        "Attempted Murder",
+        "Rape",
+        "Sexual Assault",
+        "Child Abuse",
+        "Vehicle Theft",
+        "Hit and Run",
+        "Gang Activity",
+        "Terrorism",
+        "Identity Theft",
+        "Forgery",
+        "Bribery",
+        "Corruption",
+        "Drug Possession",
+        "Drug Smuggling",
+        "Shoplifting",
+        "Vandalism",
+        "Arson",
+        "Trespassing",
+        "Homicide",
+        "Stalking",
+        "Harassment",
+        "Smuggling",
+        "Scamming",
+        "Piracy",
+        "Counterfeiting",
+        "Public Disorder",
+        "Illegal Gambling",
+        "Poaching",
+        "Cyber Bullying",
+        "Online Scams",
+        "Credit Card Fraud",
+        "Embezzlement",
+        "Tax Evasion",
+        "Escape from Custody",
+        "Prison Break",
+        "Witness Intimidation",
+        "Wounding with Intent of Committing Murder",
+        "Conspiracy"
+        };
+
+
+
         [ObservableProperty]
         bool isRefreshing;
 
@@ -45,8 +152,8 @@ namespace MostWanted.ViewsModels
         [ObservableProperty]
         string description;
 
-        [ObservableProperty]
-        string type;
+        //[ObservableProperty]
+        //string type;
 
         [ObservableProperty]
         string imagePath; // <-- this is the path to the image
@@ -105,6 +212,49 @@ namespace MostWanted.ViewsModels
 
         //            }
         //        }
+
+
+        //[RelayCommand]
+        //async Task GetWantedPersonList()
+        //{
+        //    if (IsLoading) return;
+
+        //    try
+        //    {
+        //        IsLoading = true;
+        //        WantedPersons.Clear();
+
+        //        var onlineService = App.WantedPersonService;
+        //        var wantedPersons = await onlineService.GetWantedPersonsAsyn();
+
+        //        if (wantedPersons == null || !wantedPersons.Any())
+        //        {
+        //            await Shell.Current.DisplayAlertAsync("Info", "No records found", "OK");
+        //            return;
+        //        }
+
+        //        foreach (var person in wantedPersons)
+        //        {
+        //            WantedPersons.Add(person);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine($"Error: {ex.Message}");
+        //        await Shell.Current.DisplayAlertAsync("Error", "Failed to load data", "OK");
+        //    }
+        //    finally
+        //    {
+        //        IsLoading = false;
+        //        IsRefreshing = false;
+        //    }
+        //}
+
+
+
+
+
+
 
         [RelayCommand]
         async Task GetWantedPersonList()
@@ -180,12 +330,96 @@ namespace MostWanted.ViewsModels
 
         }
 
-        [RelayCommand]
 
+        //[RelayCommand]
+        //async Task AddPerson1()
+        //{
+        //    if (string.IsNullOrWhiteSpace(Name) ||
+        //        string.IsNullOrWhiteSpace(Description) ||
+        //        string.IsNullOrWhiteSpace(Type))
+        //    {
+        //        await Shell.Current.DisplayAlertAsync("Invalid Data", "Please Insert Data", "OK");
+        //        return;
+        //    }
+
+        //    var wantedPerson = new WantedPerson
+        //    {
+        //        Name = Name,
+        //        Description = Description,
+        //        Type = Type,
+        //        ImagePath = ImagePath
+        //    };
+
+        //    var onlineService = App.WantedPersonService;
+        //    if (onlineService == null)
+        //    {
+        //        await Shell.Current.DisplayAlertAsync("Error", "Online service not available", "OK");
+        //        return;
+        //    }
+
+        //    // Await the async call
+        //    await onlineService.AddPerson(wantedPerson);
+
+        //    // Show the correct status message
+        //    await Shell.Current.DisplayAlertAsync("Info", onlineService.StatusMessage, "OK");
+
+        //    // Refresh list from online service
+        //    await GetWantedPersonList();
+
+        //    // Clear form fields
+        //    Name = string.Empty;
+        //    Description = string.Empty;
+        //    Type = string.Empty;
+        //    ImagePath = string.Empty;
+        //}
+
+
+        [RelayCommand]
         async Task AddPerson()
         {
+            if (string.IsNullOrWhiteSpace(Name) ||
+                string.IsNullOrWhiteSpace(Description) ||
+                string.IsNullOrWhiteSpace(Type))
+            {
+                await Shell.Current.DisplayAlert("Invalid Data", "Please Insert Data", "OK");
+                return;
+            }
 
-            //Debug.WriteLine("I lov e yyyyyyyoooooooooooo");
+            var wantedPerson = new WantedPerson
+            {
+                Name = Name,
+                Description = Description,
+                Type = Type,
+                ImagePath = ImagePath
+            };
+
+            var online = App.WantedPersonServiceOnline; // strongly typed online service
+            if (online == null)
+            {
+                await Shell.Current.DisplayAlert("Error", "Online service not available", "OK");
+                return;
+            }
+
+            await online.AddPersonAsync(wantedPerson);
+
+            await Shell.Current.DisplayAlert("Info", online.StatusMessage, "OK");
+            await GetWantedPersonList();
+
+            Name = string.Empty;
+            Description = string.Empty;
+            Type = string.Empty;
+            ImagePath = string.Empty;
+        }
+
+
+
+
+        [RelayCommand]
+
+        async Task AddPerson1()
+        {
+
+            Debug.WriteLine("I lov e yyyyyyyoooooooooooo");
             if (string.IsNullOrWhiteSpace(Name) ||
                 string.IsNullOrWhiteSpace(Description) ||
                 string.IsNullOrWhiteSpace(Type))
@@ -193,21 +427,55 @@ namespace MostWanted.ViewsModels
                 await Shell.Current.DisplayAlertAsync("Invalid Data", "Please Insert Data", "OK");
                 return;
             }
-             var wantedPerson = new WantedPerson
+            var wantedPerson = new WantedPerson
             {
                 Name = Name,
                 Description = Description,
                 Type = Type,
                 ImagePath = ImagePath
-             };
-            App.WantedPersonService.AddPerson(wantedPerson);
-            await Shell.Current.DisplayAlertAsync("Info", App.WantedPersonService.StatusMessage,"OK");
+            };
+
+            var online = App.WantedPersonService as WantedPersonService;
+            if (online == null)
+            {
+                await Shell.Current.DisplayAlertAsync("Error", "Online service not available", "OK");
+                return;
+            }
+            online.AddPerson(wantedPerson);
+
+            await Shell.Current.DisplayAlertAsync("Info", App.WantedPersonService.StatusMessage, "OK");
             await GetWantedPersonList();
 
 
             Name = string.Empty;
             Description = string.Empty;
             Type = string.Empty;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
         [RelayCommand]
@@ -249,7 +517,7 @@ namespace MostWanted.ViewsModels
             };
 
             await Application.Current.MainPage.Navigation.PushModalAsync(updatePage);
-         //   await Application.Current.MainPage.Navigation.PopModalAsync();
+            //   await Application.Current.MainPage.Navigation.PopModalAsync();
 
 
         }
@@ -257,9 +525,7 @@ namespace MostWanted.ViewsModels
 
 
 
-      
 
 
-
-    }
+    } 
 }

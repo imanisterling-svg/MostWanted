@@ -4,7 +4,7 @@
              x:Class="MostWanted.TestPage2"
              xmlns:model="clr-namespace:MostWanted.Model"
              xmlns:modelview="clr-namespace:MostWanted.ViewsModels"
-             x:DataType="modelview:WantedPersonListViewModel"
+             x:DataType="modelview:AddPersonViewModel"
              Title="Add Person">
 
     <Grid ColumnSpacing="1" RowSpacing="1" Padding="5">
@@ -34,7 +34,11 @@
         <VerticalStackLayout Padding="5" Grid.Row="1" Margin="9">
             <Entry Placeholder="The Name" Text="{Binding Name}" />
             <Entry Placeholder="Enter Person Description" Text="{Binding Description}" />
-            <Entry Placeholder="Type of Offence" Text="{Binding Type}" />
+            <Picker Title="Select Offence Type"
+        ItemsSource="{Binding OffenceTypes}"
+        SelectedItem="{Binding Type, Mode=TwoWay}" />
+            
+            <!--<Entry Placeholder="Type of Offence" Text="{Binding Type}" />-->
 
             <Image x:Name="PersonImage"
        Source="{Binding ImagePath}"  
@@ -62,7 +66,7 @@
                 Grid.Row="2"
                 Margin="9"
                 IsEnabled="{Binding IsNotLoading}"
-                Command="{Binding AddPersonCommand}" />
+                Command="{Binding SaveCommand}" />
 
         <!-- Launch List Button -->
         <!--<Button Text="Launch Most Wanted" 

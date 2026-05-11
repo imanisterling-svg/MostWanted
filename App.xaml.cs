@@ -8,13 +8,16 @@ namespace MostWanted
 
 
         public static WantedPersonService WantedPersonService { get; private set; }
-    
+        public static WantedPersonServiceOnline WantedPersonServiceOnline { get; internal set; }
+
         public App(WantedPersonService wantedPersonService)
         {
             InitializeComponent();
             MainPage = new AppShell();
             
             WantedPersonService = wantedPersonService;
+
+            WantedPersonServiceOnline = WantedPersonServiceOnline;
 
 
         }

@@ -70,15 +70,7 @@
                                 <Label Grid.Column="2" Text="{Binding Type}" VerticalOptions="Center"/>
 
                                 <!-- Buttons -->
-                                <Button Grid.Column="3"
-                                       Text="Update"
-                                       Margin="5"
-                                       HeightRequest="30"
-                                       WidthRequest="70"
-                                       BackgroundColor="Orange"
-                                       TextColor="White"
-                                       Command="{Binding Source={RelativeSource AncestorType={x:Type modelview:WantedPersonListViewModel}}, Path=UpdatePersonCommand}"
-                                       CommandParameter="{Binding .}" />
+                           
 
                                 <Button Grid.Column="4"
                                        Text="Delete"
