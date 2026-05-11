@@ -76,39 +76,39 @@ namespace MostWanted.ViewsModels
 
 
 
-        [RelayCommand]
-        private async Task Save()
-        {
+        //[RelayCommand]
+        //private async Task Save()
+        //{
 
-            Debug.WriteLine("Trying to save to Online Database");
+        //    Debug.WriteLine("Trying to save to Online Database");
 
 
-            if (string.IsNullOrWhiteSpace(Name) ||
-                string.IsNullOrWhiteSpace(Description) ||
-                string.IsNullOrWhiteSpace(Type))
-            {
-                await Shell.Current.DisplayAlert("Invalid Data", "Please fill all fields", "OK");
-                return;
-            }
+        //    if (string.IsNullOrWhiteSpace(Name) ||
+        //        string.IsNullOrWhiteSpace(Description) ||
+        //        string.IsNullOrWhiteSpace(Type))
+        //    {
+        //        await Shell.Current.DisplayAlert("Invalid Data", "Please fill all fields", "OK");
+        //        return;
+        //    }
 
-            var person = new WantedPerson
-            {
-                Name = Name,
-                Description = Description,
-                Type = Type,
-                ImagePath = ImagePath
-            };
+        //    var person = new WantedPerson
+        //    {
+        //        Name = Name,
+        //        Description = Description,
+        //        Type = Type,
+        //        ImagePath = ImagePath
+        //    };
 
-            await _service.AddPersonAsync(person);
+        //    await _service.AddPersonAsync(person);
 
-            await Shell.Current.DisplayAlert("Result", _service.StatusMessage, "OK");
+        //    await Shell.Current.DisplayAlert("Result", _service.StatusMessage, "OK");
 
-            // clear form
-            Name = string.Empty;
-            Description = string.Empty;
-            Type = string.Empty;
-            ImagePath = string.Empty;
-        }
+        //    // clear form
+        //    Name = string.Empty;
+        //    Description = string.Empty;
+        //    Type = string.Empty;
+        //    ImagePath = string.Empty;
+        //}
 
 
 
@@ -492,42 +492,6 @@ namespace MostWanted.ViewsModels
         //}
 
 
-        [RelayCommand]
-        async Task AddPerson()
-        {
-            if (string.IsNullOrWhiteSpace(Name) ||
-                string.IsNullOrWhiteSpace(Description) ||
-                string.IsNullOrWhiteSpace(Type))
-            {
-                await Shell.Current.DisplayAlert("Invalid Data", "Please Insert Data", "OK");
-                return;
-            }
-
-            var wantedPerson = new WantedPerson
-            {
-                Name = Name,
-                Description = Description,
-                Type = Type,
-                ImagePath = ImagePath
-            };
-
-            var online = App.WantedPersonServiceOnline; // strongly typed online service
-            if (online == null)
-            {
-                await Shell.Current.DisplayAlert("Error", "Online service not available", "OK");
-                return;
-            }
-
-            await online.AddPersonAsync(wantedPerson);
-
-            await Shell.Current.DisplayAlert("Info", online.StatusMessage, "OK");
-            await GetWantedPersonList();
-
-            Name = string.Empty;
-            Description = string.Empty;
-            Type = string.Empty;
-            ImagePath = string.Empty;
-        }
 
 
 
