@@ -32,11 +32,7 @@
                     <Grid>
                         <Image Source="{Binding ImagePath}" Aspect="AspectFill"
                            MinimumHeightRequest="250">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type modelview:WantedPersonOnlineViewModel}}, Path=GetWantedPersonDetailsCommand}" 
-                                CommandParameter="{Binding Id}" />
-                            </Image.GestureRecognizers>
+                          
                         </Image>
                         <Label Text="{Binding Name}"
                            BackgroundColor="#80000000"

@@ -9,6 +9,7 @@ namespace MostWanted
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(WantedPersonsDetailPage), typeof(WantedPersonsDetailPage));
+            Routing.RegisterRoute(nameof(ReportSpottedPage), typeof(ReportSpottedPage));
 
 
             //NavigationPage LayoutExample = new NavigationPage(new LayoutExample());
